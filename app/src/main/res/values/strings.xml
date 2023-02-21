@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ClaseTres</string>
+    <string name="LadoUno">Lado Uno</string>
+    <string name="LadoDos">Lado Dos</string>
+    <string name="BotonCalcular">Calcular</string>
+    <string name="Resultado">El resultado es:</string>
+</resources>
