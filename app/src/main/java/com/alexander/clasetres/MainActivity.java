@@ -2,6 +2,7 @@ package com.alexander.clasetres;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,20 +25,19 @@ public class MainActivity extends AppCompatActivity {
         ladoDos = findViewById(R.id.ladoDos);
         result = findViewById(R.id.result);
         calculate = findViewById(R.id.calculate);
+
+        calculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoActivity2(view);
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        calculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                float sideOne = Float.parseFloat(ladoUno.getText().toString());
-                float sideTwo = Float.parseFloat(ladoDos.getText().toString());
-                float resultado = sideOne*sideTwo;
-                result.setText("Su resultado es: "+String.valueOf(resultado));
-            }
-        });
+
     }
 
     @Override
@@ -62,5 +62,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "Estoy en onDestroy: ");
+    }
+
+    //Creo una funcion, con nombre gotoActivity2, es publica y no espera nada de respuesta
+    //Vire es el tipo de dato(en este caso,  un objeto que es la vista View)
+    //view es el nombre del objeto que recibe la función
+
+    public void gotoActivity2(View view) {
+
+        float sideOne = Float.parseFloat(ladoUno.getText().toString());
+        float sideTwo = Float.parseFloat(ladoDos.getText().toString());
+        float result = sideOne*sideTwo;
+        Log.i(TAG, String.valueOf(sideOne));
+        Intent sendData = new Intent(this, secontDisplay.class);
+        sendData.putExtra("numberOne", sideOne);
+        sendData.putExtra("numberTwo", sideTwo);
+        sendData.putExtra("result", result);
+        startActivity(sendData);
     }
 }
